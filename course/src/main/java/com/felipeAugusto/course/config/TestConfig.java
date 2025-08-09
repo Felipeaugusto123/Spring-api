@@ -3,16 +3,12 @@ package com.felipeAugusto.course.config;
 import java.time.Instant;
 import java.util.Arrays;
 
+import com.felipeAugusto.course.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.felipeAugusto.course.entities.Category;
-import com.felipeAugusto.course.entities.Order;
-import com.felipeAugusto.course.entities.OrderItem;
-import com.felipeAugusto.course.entities.Product;
-import com.felipeAugusto.course.entities.User;
 import com.felipeAugusto.course.entities.enums.OrderStatus;
 import com.felipeAugusto.course.repositories.CategoryRepository;
 import com.felipeAugusto.course.repositories.OrderItemRepository;
@@ -78,6 +74,12 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+
+        Payment pay1 = new Payment(null,Instant.parse("2019-06-20T21:53:07Z"),o1);
+        o1.setPayment(pay1);
+
+        orderRepository.save(o1);
+
 	}
 
 }
