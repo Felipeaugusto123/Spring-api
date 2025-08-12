@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.felipeAugusto.course.servicies.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.felipeAugusto.course.entities.User;
@@ -32,11 +33,12 @@ public class UserService {
     }
 
     public void deleteById(Long id){
+        findById(id);
         repository.deleteById(id);
     }
 
     public User update(Long id,User user){
-        User entity = repository.getReferenceById(id);
+        User entity = findById(id);
         updateUser(entity,user);
         return repository.save(entity);
     }
